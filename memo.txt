@@ -1,0 +1,84 @@
+
+/*
+{
+  userid:
+  action:
+  data: 固有のデータ
+  transaction: 'not completed' / 'completed'
+  timestamp:
+*/
+
+
+function 
+
+const MAX_DURATION = 3;  // hour
+
+
+function isExit(text) {
+
+  let txt = text.toUpperString().trim();
+
+  if(txt.indexOf('終') == 0 ||
+     txt.indexOf('止') == 0 ||
+     txt.indexOf('おわ') == 0 ||
+     txt.indexOf('やめ') == 0 ||
+     txt.indexOf('メニュ') == 0
+     txt.indexOf('キャンセル') ||
+     txt == 'CANCEL' ||
+     txt == 'STOP' ||
+     txt == 'COMPLETE' ||
+     txt == 'EXIT' ||
+     txt == 'MENU')
+
+     return true;
+  else
+     return false;
+}
+
+
+
+
+function getUserStatus(event) {
+
+   return new Promise(function(resolve, reject){
+
+      objCache.get(event.source.userid, function(err, response){
+
+         if(err || response == null){
+            return reject(event);
+
+         } else if(isExit(event.message.text)) {
+            return reject(event);
+
+         } else {
+            let currentTime = new Date();
+            let dt = new Data(response.timestamp);
+            if(currentTime.getTime() - dt.getTime() > 1000 * 60 * 60 *  MAX_DURATION)
+               return reject(event);
+            else 
+               return resolve(response);
+         }
+      });
+   });
+}
+
+
+function onUserIdNotFound(event) {
+   let dt = new Date();
+
+   data = {
+      "userid": userid,
+      "action": "menu",
+      "data": {} 
+      "timestampe": dt.toISOString()
+   }
+
+   objCache.put(userid, data, function(err){
+       if(err) {
+           console.log(err);
+           res.send(500, JSON.parse(JSON.stringify(err)));
+       } else {
+           res.send(200);
+       }
+   }
+}
