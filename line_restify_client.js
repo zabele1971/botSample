@@ -13,8 +13,8 @@ const RequestError = require('@line/bot-sdk').RequestError;
 const SignatureValidationFailed = require('@line/bot-sdk').SignatureValidationFailed;
 
 const LINE_CONFIG = {
-  channelAccessToken: "32pH82R5T9BGmSG9nvXP7o7VbPokcsnFoJjpXG1flQdiilJhxO4RosnUf53H6FVKjSyJAeaDOLDdWSjpCQ2RpXpnFEhl9miDZNBOnDNT3j81szzj0K+nvHozs7TeHZA0eXlabhJ4rz33aBD2RzOiHAdB04t89/1O/w1cDnyilFU=",
-  channelSecret: process.env.LINE_CHANNEL_SECRET || '6401b118cdcc55e15f010867529117f8'
+  channelAccessToken: "(your access token)",
+  channelSecret: process.env.LINE_CHANNEL_SECRET || '(your channel secret)'
 };
 
 exports.LINE_CONFIG = LINE_CONFIG; // server.jsから呼び出すために export
